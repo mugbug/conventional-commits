@@ -1,0 +1,41 @@
+name: 🔍 Lint PR
+
+on:
+  pull_request:
+    types:
+      - opened
+      - edited
+      - synchronize
+
+jobs:
+  lint-pr-title:
+    runs-on: ubuntu-latest
+    env:
+      PR_TITLE: ${{ github.event.pull_request.title }}
+      CONVENTIONAL_COMMIT_REGEX: ^(feat|fix|chore|refactor|docs)(?:\((\w+\D\-\d+)\))!?:(.*)$
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: 🔍 Lint PR title
+        uses: actions-ecosystem/action-regex-match@v2
+        id: regex-match
+        with:
+          text: ${{ env.PR_TITLE }}
+          regex: ${{ env.CONVENTIONAL_COMMIT_REGEX }}
+
+      - name: 💬 Post comment in case of failure
+        uses: actions-ecosystem/action-create-comment@v1
+        if: ${{ steps.regex-match.outputs.match == '' }}
+        with:
+          github_token: ${{ secrets.github_token }}
+          body: |
+            Hello, @${{ github.actor }}!
+
+            The PR title does not match the guidelines. Try renaming it to follow this pattern:
+            ```
+            type(JIRA-123): description
+            ```
+
+      - name: 🚫 Fail if PR title doesn't match our convention
+        if: ${{ steps.regex-match.outputs.match == '' }}
+        run: exit 1
