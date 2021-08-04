@@ -25,7 +25,7 @@ GH_ACTIONS_FOLDER=$CURRENT_DIR/.github/workflows/
 echo $GH_ACTIONS_FOLDER
 
 if [ ! -d "$GH_ACTIONS_FOLDER" ]; then
-  mkdir .github/workflows/
+  mkdir .github && cd .github && mkdir workflows && cd ..
 fi
 
 cp pull_request_lint.yml $CURRENT_DIR/.github/workflows/
