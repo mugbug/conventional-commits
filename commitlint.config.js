@@ -1,4 +1,4 @@
-const COMMIT_AVAILABLE_TYPES = ['fix', 'feat', 'chore', 'refactor', 'docs', 'BREAKING CHANGE'];
+const COMMIT_AVAILABLE_TYPES = ['fix', 'feat', 'chore', 'refactor', 'docs', 'ci'];
 
 module.exports = {
   extends: ['@commitlint/config-conventional'],
