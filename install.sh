@@ -32,4 +32,5 @@ fi
 
 cp conventional-commits/pull_request_lint.yml $CURRENT_DIR/.github/workflows/
 
+# clean everything up
 rm -rf conventional-commits
