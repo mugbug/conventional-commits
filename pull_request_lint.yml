@@ -1,5 +1,4 @@
 name: 🔍 Lint PR
-
 on:
   pull_request:
     types:
@@ -31,10 +30,12 @@ jobs:
           body: |
             Hello, @${{ github.actor }}!
 
-            The PR title does not match the guidelines. Try renaming it to follow this pattern:
+            The PR title message does not match our conventions. Try renaming it to follow this pattern:
             ```
-            type(JIRA-123): description
+            type(JIRA-123)!: description
             ```
+
+            > for more info, check [our docs on conventional commits](https://www.conventionalcommits.org/en/v1.0.0/)
 
       - name: 🚫 Fail if PR title doesn't match our convention
         if: ${{ steps.regex-match.outputs.match == '' }}
