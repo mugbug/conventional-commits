@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       PR_TITLE: ${{ github.event.pull_request.title }}
-      CONVENTIONAL_COMMIT_REGEX: ^(feat|fix|chore|refactor|docs|ci)(?:\((\w+\D\-\d+)\))!?:(.*)$
+      CONVENTIONAL_COMMIT_REGEX: ^(feat|fix|chore|refactor|docs|ci)(?:\((\w+\D\-\d+|release)\))!?:(.*)$
     steps:
       - uses: actions/checkout@v2
 
