@@ -24,7 +24,12 @@ npx husky install
 npx husky add .husky/commit-msg 'npx --no-install commitlint --edit $1'
 
 # add PR title lint github action
-GH_ACTIONS_FOLDER=$CURRENT_DIR/.github/workflows/
+GH_FOLDER=$CURRENT_DIR/.github
+GH_ACTIONS_FOLDER=$GH_FOLDER/workflows/
+
+if [ -d "$GH_FOLDER" ]; then
+  cd .github && mkdir workflows && cd ..
+fi
 
 if [ ! -d "$GH_ACTIONS_FOLDER" ]; then
   mkdir .github && cd .github && mkdir workflows && cd ..
